@@ -12,7 +12,7 @@ public class DetermineData {
                 !nationalityCurrency.equals("dollars") && !nationalityCurrency.equals("гривня")) {
             System.out.println("Sorry, but this currency is not correct");
             System.out.println("The program can be converted into only гривні or dollars");
-            System.out.println("Please enter dollars or гривня");
+            System.out.println("Please enter dollars or гривня or you can enter ukr or en");
             nationalityCurrency = scanner.next();
         }
         if (nationalityCurrency.equals("dollars")) {
@@ -25,9 +25,17 @@ public class DetermineData {
 
     public static int[] defineAmount() {
         int[] result = new int[2];
+        boolean execute = true;
         System.out.println("Please enter your amount, we will convert it into a String version");
-        String number = "";
-        number = scanner.next();
+        String number = scanner.next();
+        while (execute) {
+            if (number.matches("([-+])?[0-9]+(\\.[0-9]+)?") || number.matches("([-+])?[0-9]+(,[0-9]+)?")) {
+                execute = false;
+            } else {
+                System.out.println("Please enter the correct number");
+                number = scanner.next();
+            }
+        }
         String amount = String.valueOf(number);
         String afterComma = "";
         if (amount.contains(",")) {
